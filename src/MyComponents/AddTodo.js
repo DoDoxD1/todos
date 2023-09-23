@@ -1,26 +1,50 @@
 import React from 'react';
+import { useState } from 'react';
 
-export default function AddTodo() {
+export default function AddTodo(props) {
   let formStyle = {
     maxWidth: '20rem',
   };
+  const [title, settitle] = useState('');
+  const [desc, setdesc] = useState('');
+
+  const submit = (e) => {
+    e.preventDefault();
+    if (!title || !desc) {
+      window.alert("Title/Desc can't be left empty");
+    }
+    props.addTodo(title, desc);
+  };
   return (
     <>
-      <form style={formStyle} className="m-3">
+      <h3 className="text-left">Add a Todo</h3>
+      <form style={formStyle} className="m-3 " onSubmit={submit}>
         <div className="mb-3">
-          <label for="exampleInputEmail1" className="form-label">
+          <label htmlFor="InputTitle" className="form-label">
             Title
           </label>
-          <input type="text" className="form-control" id="exampleInputEmail1" />
+          <input
+            type="text"
+            className="form-control"
+            value={title}
+            onChange={(e) => {
+              settitle(e.target.value);
+            }}
+            id="InputTitle"
+          />
         </div>
         <div className="mb-3">
-          <label for="exampleInputPassword1" className="form-label">
+          <label htmlFor="InputDesc" className="form-label">
             Description
           </label>
           <input
             type="text"
             className="form-control"
-            id="exampleInputPassword1"
+            onChange={(e) => {
+              setdesc(e.target.value);
+            }}
+            id="InputDesc"
+            value={desc}
           />
         </div>
         <button type="submit" className="btn btn-success btn-sm">

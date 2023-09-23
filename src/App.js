@@ -23,6 +23,15 @@ function App() {
     },
   ]);
 
+  const addTodo = (title, desc) => {
+    const newTodo = {
+      sno: todos.length + 1,
+      title: title,
+      desc: desc,
+    };
+    console.log(newTodo);
+    setTodos([...todos, newTodo]);
+  };
   const deleteTodo = (todoitem) => {
     // console.log('Im delete', todoitem);
     setTodos(
@@ -34,7 +43,7 @@ function App() {
   return (
     <>
       <Header />
-      <Todo todos={todos} deleteTodo={deleteTodo} />
+      <Todo todos={todos} addTodo={addTodo} deleteTodo={deleteTodo} />
       <Footer />
     </>
   );
