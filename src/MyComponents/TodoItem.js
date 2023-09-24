@@ -2,7 +2,8 @@ import React from 'react';
 
 export default function TodoItem({ todo, deleteTodo }) {
   let style = {
-    width: '40rem',
+    width: '40%',
+    border: 'none',
   };
   return (
     <>
@@ -19,6 +20,7 @@ export default function TodoItem({ todo, deleteTodo }) {
             Delete
           </button>
         </div>
+        <hr></hr>
       </div>
     </>
   );

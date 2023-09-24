@@ -7,13 +7,7 @@ import { useState } from 'react';
 function App() {
   let initTodo;
   if (localStorage.getItem('Todos') === null) {
-    initTodo = [
-      // {
-      //   sno: 1,
-      //   title: 'Example Todo',
-      //   describe: 'Example Desc',
-      // },
-    ];
+    initTodo = [];
   } else {
     initTodo = JSON.parse(localStorage.getItem('Todos'));
   }
@@ -22,7 +16,7 @@ function App() {
 
   const addTodo = (title, desc) => {
     const newTodo = {
-      sno: todos.length + 1,
+      sno: todos.length === 0 ? 1 : todos[todos.length - 1].sno + 1,
       title: title,
       desc: desc,
     };
@@ -31,7 +25,6 @@ function App() {
     localStorage.setItem('Todos', JSON.stringify(todos));
   };
   const deleteTodo = (todoitem) => {
-    // console.log('Im delete', todoitem);
     setTodos(
       todos.filter((todo) => {
         return todo !== todoitem;
@@ -39,20 +32,11 @@ function App() {
     );
     localStorage.setItem('Todos', JSON.stringify(todos));
   };
-  const myStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  };
+
   return (
     <>
       <Header />
-      <Todo
-        style={myStyle}
-        todos={todos}
-        addTodo={addTodo}
-        deleteTodo={deleteTodo}
-      />
+      <Todo todos={todos} addTodo={addTodo} deleteTodo={deleteTodo} />
       <Footer />
     </>
   );

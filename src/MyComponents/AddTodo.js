@@ -17,7 +17,7 @@ export default function AddTodo(props) {
   };
   return (
     <>
-      <h3 className="text-left">Add a Todo</h3>
+      <h3>Add a Todo</h3>
       <form style={formStyle} className="m-3 " onSubmit={submit}>
         <div className="mb-3">
           <label htmlFor="InputTitle" className="form-label">
