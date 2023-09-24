@@ -17,13 +17,14 @@ export default function AddTodo(props) {
   return (
     <>
       <h3>Add a Todo</h3>
-      <form style={formStyle} className="m-3 " onSubmit={submit}>
+      <form style={formStyle} className="m-3 " onSubmit={submit} name="form">
         <div className="mb-3">
           <label htmlFor="InputTitle" className="form-label">
             Title
           </label>
           <input
             type="text"
+            name="title"
             className="form-control"
             value={title}
             onChange={(e) => {
@@ -38,6 +39,7 @@ export default function AddTodo(props) {
           </label>
           <input
             type="text"
+            name="desc"
             className="form-control"
             onChange={(e) => {
               setdesc(e.target.value);
@@ -46,7 +48,7 @@ export default function AddTodo(props) {
             value={desc}
           />
         </div>
-        <button type="submit" className="btn btn-success btn-sm">
+        <button type="submit" className="btn btn-success btn-sm" name="submit">
           Submit
         </button>
       </form>
