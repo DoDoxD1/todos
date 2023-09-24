@@ -12,8 +12,7 @@ export default function AddTodo(props) {
     e.preventDefault();
     if (!title || !desc) {
       window.alert("Title/Desc can't be left empty");
-    }
-    props.addTodo(title, desc);
+    } else props.addTodo(title, desc);
   };
   return (
     <>

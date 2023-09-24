@@ -2,7 +2,7 @@ import './App.css';
 import Header from './MyComponents/header';
 import Footer from './MyComponents/Footer';
 import Todo from './MyComponents/TodosList';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
   let initTodo;
@@ -13,6 +13,9 @@ function App() {
   }
 
   const [todos, setTodos] = useState(initTodo);
+  useEffect(() => {
+    localStorage.setItem('Todos', JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = (title, desc) => {
     const newTodo = {
@@ -22,7 +25,6 @@ function App() {
     };
     console.log(newTodo);
     setTodos([...todos, newTodo]);
-    localStorage.setItem('Todos', JSON.stringify(todos));
   };
   const deleteTodo = (todoitem) => {
     setTodos(
@@ -30,7 +32,6 @@ function App() {
         return todo !== todoitem;
       })
     );
-    localStorage.setItem('Todos', JSON.stringify(todos));
   };
 
   return (
