@@ -1,27 +1,24 @@
 import './App.css';
 import Header from './MyComponents/header';
 import Footer from './MyComponents/Footer';
-import Todo from './MyComponents/Todo';
+import Todo from './MyComponents/TodosList';
 import { useState } from 'react';
 
 function App() {
-  const [todos, setTodos] = useState([
-    {
-      sno: 1,
-      title: 'Item1',
-      desc: 'Lorem Ipsum is a placeholder text used in design when creating content. It helps designers plan out where the content will sit without needing to wait for the content to be written and approved.',
-    },
-    {
-      sno: 2,
-      title: 'Item2',
-      desc: 'It helps designers plan out where the content will sit without needing to wait for the content to be written and approved.',
-    },
-    {
-      sno: 3,
-      title: 'Item3',
-      desc: 'Lorem Ipsum is a placeholder text used in design when creating content. for the content to be written and approved.',
-    },
-  ]);
+  let initTodo;
+  if (localStorage.getItem('Todos') === null) {
+    initTodo = [
+      // {
+      //   sno: 1,
+      //   title: 'Example Todo',
+      //   describe: 'Example Desc',
+      // },
+    ];
+  } else {
+    initTodo = JSON.parse(localStorage.getItem('Todos'));
+  }
+
+  const [todos, setTodos] = useState(initTodo);
 
   const addTodo = (title, desc) => {
     const newTodo = {
@@ -31,6 +28,7 @@ function App() {
     };
     console.log(newTodo);
     setTodos([...todos, newTodo]);
+    localStorage.setItem('Todos', JSON.stringify(todos));
   };
   const deleteTodo = (todoitem) => {
     // console.log('Im delete', todoitem);
@@ -39,11 +37,22 @@ function App() {
         return todo !== todoitem;
       })
     );
+    localStorage.setItem('Todos', JSON.stringify(todos));
+  };
+  const myStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   };
   return (
     <>
       <Header />
-      <Todo todos={todos} addTodo={addTodo} deleteTodo={deleteTodo} />
+      <Todo
+        style={myStyle}
+        todos={todos}
+        addTodo={addTodo}
+        deleteTodo={deleteTodo}
+      />
       <Footer />
     </>
   );
